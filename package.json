@@ -1,0 +1,16 @@
+{
+  "name": "aurora-query-agent",
+  "version": "1.0.0",
+  "description": "Stateless game server query executor for the Aurora panel (gamedig).",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/agent.test.js"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "dependencies": {
+    "gamedig": "^5.3.3"
+  }
+}

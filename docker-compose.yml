@@ -1,0 +1,19 @@
+# Aurora query agent. One per node, next to Wings.
+# network_mode: host lets the agent reach the published game ports on this machine.
+# It is used ONLY for this container, never for game containers.
+services:
+  aurora-query-agent:
+    image: ${AGENT_IMAGE:-aurora-query-agent:local}
+    build: .
+    container_name: aurora-query-agent
+    restart: unless-stopped
+    network_mode: host
+    env_file: .env
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 128m
+    cpus: 0.25
+    volumes:
+      # Cert copy made by deploy-hook.sh (readable by UID 1000). The agent reloads it every hour.
+      - /etc/aurora-query-agent/certs:/certs:ro
